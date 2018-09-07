@@ -6,8 +6,8 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./app.conf:/leanote/conf/app.conf
-      - ./upload:/leanote/public/upload
+      - ./app.conf:/leanote/conf/app.conf:z
+      - ./upload:/leanote/public/upload:z
       - /etc/localtime:/etc/localtime:ro
     links:
       - mongo
@@ -17,7 +17,7 @@ services:
     container_name: leanote_db
     image: mongo
     volumes:
-      - ./data:/data/db
+      - ./data:/data/db:z
       - /etc/localtime:/etc/localtime:ro
     restart: always
 
@@ -27,8 +27,8 @@ services:
     links:
       - mongo
     volumes:
-      - ./initdb.sh:/initdb.sh
-      - ./mongodb_backup:/mongodb_backup
+      - ./initdb.sh:/initdb.sh:z
+      - ./mongodb_backup:/mongodb_backup:z
     command: sh /initdb.sh
 
 networks:
